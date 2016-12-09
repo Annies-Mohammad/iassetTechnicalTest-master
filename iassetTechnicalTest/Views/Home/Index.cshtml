@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div ng-controller="controller">
+    <h1>{{greeting}}</h1>
+    <br />
+    <table>
+        <tr>
+            <td><h5>Country : &nbsp;</h5></td>
+            <td><input ng-model="country" type="text" class="form-control" /></td>
+            <td>
+                <input type="button" ng-click="getCities()" class="btn btn-success" value="Get Cities" />
+            </td>
+            <td>
+                <span class="glyphicon glyphicon-ok green" ng-show="allcities.length>0"></span>
+            </td>
+        </tr>
+    </table>
+
+    <h5><span ng-show="errorMessage" class="text-center text-danger">{{errorMessage}}</span></h5>
+
+    <div class="btn-group">
+        <a class="btn btn-default dropdown-toggle btn-select2" data-toggle="dropdown" href="#">Filter by <span class="red">{{currentFilter}}</span><span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="#" ng-click="filterByFirstLetter(cityfilter)" ng-repeat="cityfilter in ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']">{{cityfilter}}</a></li>
+        </ul>
+    </div>
+
+    <div class="btn-group">
+        <a class="btn btn-default dropdown-toggle btn-select2" data-toggle="dropdown" href="#">Select a City<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="#" ng-repeat="city in cities track by $index" ng-click="getCityWeatherInfo(city, country)">{{city}}</a></li>
+        </ul>
+    </div>
+
+    <div ng-show="cityinfo" class="panel panel-info">
+        <div class="panel-heading">Weather information for {{selectedcity}}</div>
+        <div class="panel-body">
+            <table>
+                <tr>
+                    <td><h5>Location: &nbsp;</h5></td>
+                    <td><h5><span class="text-info">{{cityinfo.location}}</span></h5></td>
+                </tr>
+                <tr>
+                    <td><h5>Time: &nbsp;</h5></td>
+                    <td><h5><span class="text-info">{{cityinfo.time}}</span></h5></td>
+                </tr>
+                <tr>
+                    <td><h5>Wind: &nbsp;</h5></td>
+                    <td><h5><span class="text-info">{{cityinfo.wind}}</span> </h5></td>
+                </tr>
+                <tr>
+                    <td><h5>Visibility: &nbsp;</h5></td>
+                    <td><h5><span class="text-info">{{cityinfo.visibility}}</span></h5></td>
+                </tr>
+                <tr>
+                    <td><h5>Sky conditions: &nbsp;</h5></td>
+                    <td><h5><span class="text-info">{{cityinfo.skyConditions}}</span></h5></td>
+                </tr>
+                <tr>
+                    <td><h5>Temperature: &nbsp;</h5></td>
+                    <td><h5><span class="text-info">{{cityinfo.temperature}}</span></h5></td>
+                </tr>
+                <tr>
+                    <td><h5>Dew Point: &nbsp;</h5></td>
+                    <td><h5><span class="text-info">{{cityinfo.dewPoint}}</span></h5></td>
+                </tr>
+                <tr>
+                    <td><h5>Relative Humidity: &nbsp;</h5></td>
+                    <td><h5><span class="text-info">{{cityinfo.relativeHumidity}}</span></h5></td>
+                </tr>
+                <tr>
+                    <td><h5>Pressure: &nbsp;</h5></td>
+                    <td><h5><span class="text-info">{{cityinfo.pressure}}</span></h5></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
